@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "MyIMC"
+rootProject.name = "MyIMCv3"

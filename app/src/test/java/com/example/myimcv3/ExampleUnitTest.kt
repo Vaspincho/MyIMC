@@ -1,4 +1,4 @@
-package com.example.myimc
+package com.example.myimcv3
 
 import org.junit.Test
 

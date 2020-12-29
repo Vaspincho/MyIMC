@@ -5,4 +5,42 @@
     <string name="mujer">Mujer</string>
     <string name="hombre">Hombre</string>
     <string name="calcular">Calcular</string>
+    <string name="filename">resultados.txt</string>
+    <string name="msg_correct">Datos guardados</string>
+    <string name="msg_warning2">"El fichero no existe"</string>
+    <string name="title_activity_historico">Historico</string>
+    <string name="peso_inferior">Peso inferior al normal</string>
+    <string name="normal">Normal</string>
+    <string name="sobrepeso">Sobrepeso</string>
+    <string name="obesidad">Obesidad</string>
+    <string name="seleccionar_sexo">Tienes que seleccionar el sexo</string>
+    <string name="campos_sexo_altura">Tienes que rellenar los campos de peso y altura</string>
+
+    Tienes que rellenar los campos de peso y altura
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+
+    <string-array name="meses">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imc">IMC</string>
+    <string name="hist_rico">Histórico</string>
+
+
 </resources>
