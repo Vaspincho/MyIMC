@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HistoricoActivity"
+            android:name=".HistoricoActivity_old"
             android:label="@string/title_activity_historico"
             android:parentActivityName=".MainActivity">
 

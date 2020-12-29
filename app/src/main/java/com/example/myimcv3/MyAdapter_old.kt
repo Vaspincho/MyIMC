@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 @Suppress("DEPRECATION")
-internal class MyAdapter(
+internal class MyAdapter_old(
     var context: Context,
     fm: FragmentManager,
     var totalTabs: Int

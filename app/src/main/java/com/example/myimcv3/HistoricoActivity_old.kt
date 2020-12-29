@@ -10,7 +10,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-class HistoricoActivity : AppCompatActivity() {
+class HistoricoActivity_old : AppCompatActivity() {
     private lateinit var binding2: ActivityHistoricoBinding
     private val myAdapter : RecyclerAdapter = RecyclerAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -51,6 +51,9 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
             binding.tvRes.text = dato.resultado
             binding.tvResIMC.text = dato.imc.toString()
             binding.tvSexo.text = dato.sexo
+            binding.tvPeso.text = dato.peso.toString()
+            binding.tvAltura.text = dato.altura.toString()
+
 
         }
 

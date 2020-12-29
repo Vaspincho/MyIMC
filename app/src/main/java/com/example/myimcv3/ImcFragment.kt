@@ -1,15 +1,16 @@
 package com.example.myimcv3
 
 import android.app.Activity
-import android.icu.util.IslamicCalendar
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.myimcv3.databinding.ActivityMainBinding
-
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import com.example.myimcv3.databinding.FragmentImcBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.make
@@ -37,11 +38,13 @@ class ImcFragment : Fragment(){
     private var imcView: View? = null
     private lateinit var binding: FragmentImcBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
     Log.d("pruebas", "1")
-        //binding = FragmentImcBinding.inflate(layoutInflater)
+
         imcView =  inflater.inflate(R.layout.fragment_imc, container, false)
 
     binding = FragmentImcBinding.inflate(inflater, container, false)
@@ -51,7 +54,7 @@ class ImcFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btCalcular.setOnClickListener({calcularIMC()})
+        binding.btCalcular.setOnClickListener({ calcularIMC() })
 
 
     }
@@ -81,6 +84,7 @@ class ImcFragment : Fragment(){
     private fun calcularIMC() {
 
         val fecha = Calendar.getInstance()
+        val linea: String? = null
         // Se comprueba si hay datos de peso y altura
         if (binding.tbPeso.text.isNotEmpty() && binding.tbAltura.text.isNotEmpty()){
             val altura: Double =   (binding.tbAltura.text.toString()).toDouble()/100
@@ -102,10 +106,13 @@ class ImcFragment : Fragment(){
                 }
 
                 var linea = "${fecha.get(Calendar.DAY_OF_MONTH) }" + "-${fecha.get(Calendar.MONTH) + 1}" + "-${fecha.get(
-                    Calendar.YEAR)}"
+                    Calendar.YEAR
+                )}"
                 linea += ";Hombre;" + String.format("%.2f", imc) + ";${binding.lbResultado.text}" +";${binding.tbAltura.text.toString()}" + ";${binding.tbPeso.text.toString()}"
 
-                writeFile(linea, false )
+
+
+                //writeFile(linea, false)
                 // Si se selecciona "mujer"
             } else if (binding.rbMujer.isChecked){
                 if (imc < 18.5){
@@ -118,21 +125,54 @@ class ImcFragment : Fragment(){
                     binding.lbResultado.text = getString(R.string.obesidad)
                 }
                 var linea = "${fecha.get(Calendar.DAY_OF_MONTH) }" + "-${fecha.get(Calendar.MONTH) + 1}" + "-${fecha.get(
-                    Calendar.YEAR)}"
-                linea += ";Mujer;" + String.format("%.2f", imc) + ";${binding.lbResultado.text}" +";${binding.tbAltura}" + ";${binding.tbPeso}"
+                    Calendar.YEAR
+                )}"
+                linea += ";Mujer;" + String.format("%.2f", imc) + ";${binding.lbResultado.text}" +";${binding.tbAltura.text.toString()}" + ";${binding.tbPeso.text.toString()}"
 
-                writeFile(linea, false )
+                //writeFile(linea, false)
             } else {
                 // En caso de que no se seleccione sexo, se muestra un aviso
                 getActivity()?.let {
                     make(
                         it.findViewById(android.R.id.content),
-
                         getString(R.string.seleccionar_sexo),
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
             }
+
+            AlertDialog.Builder(context!!)
+                .setTitle(R.string.aviso)
+                .setMessage(R.string.quieres_guardar_los_datos) // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(
+                    android.R.string.yes
+                ) { dialog, which ->
+                   if (linea != null) {
+                       writeFile(linea, false)
+                   }
+                    getActivity()?.let {
+                        Snackbar.make(
+                            it.findViewById(android.R.id.content),
+                            getString(R.string.datos_guardados),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+
+                } // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no) { dialog, which ->
+                    getActivity()?.let {
+                        Snackbar.make(
+                            it.findViewById(android.R.id.content),
+                            getString(R.string.datos_no_guardados),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                }
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
+
+
             // En caso de que no se se pongan datos de peso o altura, se muestra un aviso
         } else {
             getActivity()?.let {
@@ -195,5 +235,25 @@ class ImcFragment : Fragment(){
         }
     }
 
+     class SaveDialogFragment  : DialogFragment() {
+
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+            return activity?.let {
+                // Use the Builder class for convenient dialog construction
+                val builder = AlertDialog.Builder(it)
+                builder.setMessage(R.string.quieres_guardar_los_datos)
+                    .setPositiveButton(R.string.label_ok,
+                        DialogInterface.OnClickListener { dialog, id ->
+                            // FIRE ZE MISSILES!
+                        })
+                    .setNegativeButton(R.string.label_cancel,
+                        DialogInterface.OnClickListener { dialog, id ->
+                            // User cancelled the dialog
+                        })
+                // Create the AlertDialog object and return it
+                builder.create()
+            } ?: throw IllegalStateException("Activity cannot be null")
+        }
+    }
 
 }

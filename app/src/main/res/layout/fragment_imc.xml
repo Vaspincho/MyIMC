@@ -84,24 +84,32 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <RadioButton
-        android:id="@+id/rbHombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/hombre"
-        app:layout_constraintEnd_toStartOf="@+id/rbMujer"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <RadioButton
-        android:id="@+id/rbMujer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:text="@string/mujer"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="231dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:baselineAligned="false"
+        android:checkedButton="171"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rbHombre" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+
+        <RadioButton
+            android:id="@+id/rbMujer"
+            android:layout_width="109dp"
+            android:layout_height="26dp"
+            android:text="@string/mujer" />
+
+        <RadioButton
+            android:id="@+id/rbHombre"
+            android:layout_width="109dp"
+            android:layout_height="25dp"
+            android:text="@string/hombre" />
+    </RadioGroup>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
