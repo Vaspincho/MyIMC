@@ -17,4 +17,9 @@ class DatoHistorico(val fecha: String, val sexo: String, val imc: Double, val re
         this.pesoDat = peso
         this.alturaDat = altura
     }
+
+    override fun toString(): String {
+        var linea =  fechaDat+";"+sexoDat+";"+String.format( "%.2f",imcDat)+";"+resultadoDat+";"+pesoDat+";"+alturaDat
+        return linea
+    }
 }

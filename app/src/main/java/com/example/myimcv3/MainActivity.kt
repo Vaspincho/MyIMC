@@ -8,8 +8,7 @@ import com.example.myimcv3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    //lateinit var tabLayout: TabLayout
-    //lateinit var viewPager: ViewPager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,7 +27,9 @@ class MainActivity : AppCompatActivity() {
 
         // Se cargan las tabs.
         binding.tabs.setupWithViewPager(binding.viewPager)
+
     }
-
-
 }
+
+
+

@@ -2,23 +2,17 @@ package com.example.myimcv3
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myimcv3.databinding.FragmentHistoricoBinding
-import com.example.myimcv3.databinding.FragmentImcBinding
 import com.google.android.material.snackbar.Snackbar
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -37,17 +31,14 @@ class HistoricoFragment : Fragment() {
         binding = FragmentHistoricoBinding.inflate(inflater, container, false)
         return binding.root
 
-        //return inflater.inflate(R.layout.fragment_historico, container, false)
-
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d("prueba", "onViewCreated")
+    /*
+        Se usa este método para que cada vez que se accede a la tab de histórico se carguen los datos
+    */
+    override fun onResume() {
+        super.onResume()
         setUpRecyclerView()
-
     }
-
 
     private fun setUpRecyclerView() {
         Log.d("prueba", "setUpRecyclerView")
@@ -58,22 +49,21 @@ class HistoricoFragment : Fragment() {
         context?.let { myAdapter.RecyclerAdapter(readFile(), it) }
     }
 
+    /*
+    Función que lee el fichero y crea una lista con todos los datos
+     */
     fun readFile(): MutableList<DatoHistorico> {
         // Se comprueba si existe el fichero.
-        Log.d("prueba", "readFile")
         val datos: MutableList<DatoHistorico> = arrayListOf()
 
         try {
-            Log.d("prueba", "Try")
             val entrada = InputStreamReader(
                 getActivity()?.openFileInput(getString(R.string.filename))
             )
             val br = BufferedReader(entrada)
             // para cada linea crea un objeto y los guarda en la lista
             br.forEachLine {
-                Log.d("prueba", "for")
                 var linea = it.split(";")
-                Log.d("TAG", linea.toString())
                 datos.add(
                     DatoHistorico(
                         linea[0].toString(),
